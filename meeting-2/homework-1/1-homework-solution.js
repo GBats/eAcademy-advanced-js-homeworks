@@ -4,7 +4,7 @@ function Car(make, model, year) {
     this.model = model;
     this.year = year;
     this.getCarInfo = function() {
-        return `${make} ${model} released in ${year}`
+        return `${this.make} ${this.model} released in ${this.year}`
     };
     this.addOwner = function(owner) {
         let index = this.owners.indexOf(owner);
