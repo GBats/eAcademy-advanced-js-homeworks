@@ -17,7 +17,6 @@ function Car(make, model, year) {
 
     this.removeOwner = function(owner) {
         let index = this.owners.indexOf(owner);
-        console.log(index)
         if (index > -1) {
             return this.owners.splice(index, 1);
         }
