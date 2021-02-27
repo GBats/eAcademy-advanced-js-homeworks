@@ -10,9 +10,7 @@ function Car(make, model, year) {
         let index = this.owners.indexOf(owner);
         if (index === -1) {
             return this.owners.push(owner)
-        } else {
-            return
-        }
+        } 
     };
 
     this.removeOwner = function(owner) {
@@ -31,7 +29,7 @@ function Car(make, model, year) {
     };
 
     this.getFullInfo = function() {
-        return `${make} ${model} from ${year}. ${this.getOwnersCount()} person owns this car. These are - ${this.getOwnerNames().join()}`
+        return `${make} ${model} from ${year}. ${this.getOwnersCount()} person owns this car. These are - ${this.getOwnerNames().join( )}`
 
     }
 
@@ -71,7 +69,7 @@ function Person(name, surname, age, gender, cars = []) {
         }
     }
     this.getAllCarsInfo = function() {
-        return `${this.name} owns these cars: ${this.cars.map(car=>car.getCarInfo()).join()}`
+        return `${this.name} owns these cars: ${this.cars.map(car=>car.getCarInfo()).join( )}`
     }
 }
 
