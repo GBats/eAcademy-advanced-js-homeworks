@@ -53,8 +53,6 @@ function Person(name, surname, age, gender, cars = []) {
         let index = car.owners.indexOf(this);
         if (index === -1) {
             car.owners.push(this);
-        } else {
-            return
         }
 
     }
