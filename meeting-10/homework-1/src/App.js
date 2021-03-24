@@ -149,7 +149,6 @@ class App extends React.Component{
     return <div className="app">
       
         <div className="container">
-
           <div className="content">
                 <h1>ToDo List</h1>
                 <div className="display-error">
