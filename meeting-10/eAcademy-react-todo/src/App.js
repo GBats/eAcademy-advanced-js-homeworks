@@ -8,7 +8,7 @@ class App extends React.Component{
       inputValue:"",
       todos:[],
       visible:{id:-1},
-      updatedValue:"",
+      updatedValue:null,
       error:""
     }
   }
@@ -66,7 +66,7 @@ class App extends React.Component{
     this.state.todos[index].name = this.state.updatedValue;
     this.setState({error:""})
     localStorage.setItem("todos",JSON.stringify(this.state.todos))
-    this.setState({updatedValue:""})
+    this.setState({updatedValue:null})
     this.setState({visible:{id:-1}})
     this.setState({error:""})
   }
@@ -177,7 +177,7 @@ class App extends React.Component{
                         </div>
 
                         {this.state.visible.id===index ? <div className="update">
-                        <input className="input" placeholder="update todo" value={this.state.updatedValue} onChange={this.handleUpdateInput}/>
+                        <input className="input" placeholder="update todo" value={this.state.updatedValue===null ? todo.name : this.state.updatedValue } onChange={this.handleUpdateInput}/>
                         <button className="list-action-btn update-btn" onClick={(e) => this.handleUpdateTodo(index)}>Update</button>
                       </div>
                       :
