@@ -21,26 +21,26 @@ class Todo extends React.Component {
   }
 
   handleInput = (event) => {
-    this.setState({ inputValue: event.target.value });
+    this.setState(() => ({ inputValue: event.target.value }));
   };
 
   handleUpdateInput = (event) => {
-    this.setState({ updatedValue: event.target.value });
+    this.setState(() => ({ updatedValue: event.target.value }));
   };
 
   handleAdd(todo) {
     if (todo === "") {
-      return this.setState({ error: "Please enter a task" });
+      return this.setState(() => ({ error: "Please enter a task" }));
     } else if (
       this.state.todos.filter(
         (x) => x.name.toLowerCase() === todo.toLowerCase()
       ).length > 0 &&
       this.state.todos.length > 0
     ) {
-      return this.setState({
+      return this.setState(() => ({
         error: "You already have this task",
         inputValue: "",
-      });
+      }));
     }
     let obj = {
       name: todo,
@@ -48,21 +48,24 @@ class Todo extends React.Component {
       check: false,
     };
     let arr = [...this.state.todos, obj];
-    this.setState({
+    this.setState(() => ({
       todos: arr,
       inputValue: "",
       error: "",
-    });
+    }));
   }
 
   handleRemove(index) {
-    let arr = [...this.state.todos];
-    arr.splice(index, 1);
-    this.setState({
-      todos: arr,
+    const popStateTodo = (idx) => {
+      return this.state.todos.filter(
+        (todo) => todo.name !== this.state.todos[idx].name
+      );
+    };
+    this.setState(() => ({
+      todos: popStateTodo(index),
       visible: { id: -1 },
       error: "",
-    });
+    }));
   }
 
   handleVisible = (index) => {
@@ -70,23 +73,23 @@ class Todo extends React.Component {
   };
 
   handleUpdateTodo = (index) => {
-    if (this.state.updatedValue === "") {
-      return this.setState({ error: "Please enter a task" });
+    if (this.state.updatedValue === "" || this.state.updatedValue === null) {
+      return this.setState(() => ({ error: "Please enter a task" }));
     }
     if (
       this.state.todos.filter((todo) => todo.name === this.state.updatedValue)
         .length > 0
     ) {
-      return this.setState({ error: "You already have a task" });
+      return this.setState(() => ({ error: "You already have a task" }));
     }
     let arr = [...this.state.todos];
     arr[index].name = this.state.updatedValue;
-    this.setState({
+    this.setState(() => ({
       todos: arr,
       error: "",
       updatedValue: null,
       visible: { id: -1 },
-    });
+    }));
   };
 
   handleMoveUp = (index) => {
@@ -97,11 +100,11 @@ class Todo extends React.Component {
       let arr = this.state.todos;
       arr[index] = arr[index - 1];
       arr[index - 1] = temp;
-      this.setState({
+      this.setState(() => ({
         todos: arr,
         error: "",
         visible: { id: -1 },
-      });
+      }));
     }
   };
   handleMoveDown = (index) => {
@@ -112,57 +115,57 @@ class Todo extends React.Component {
     let arr = this.state.todos;
     arr[index] = arr[index + 1];
     arr[index + 1] = temp;
-    this.setState({
+    this.setState(() => ({
       todos: arr,
       error: "",
       visible: { id: -1 },
-    });
+    }));
   };
 
   handleIsDone(index) {
     let arr = [...this.state.todos];
     arr[index].isDone = !arr[index].isDone;
-    this.setState({ todos: arr });
+    this.setState(() => ({ todos: arr }));
   }
 
   handleCheck = (todo) => {
     todo.check = !todo.check;
-    this.setState({ todos: this.state.todos });
+    this.setState(() => ({ todos: this.state.todos }));
   };
 
   handleResetTasks() {
     if (this.state.todos.length === 0) {
-      return this.setState({ error: "You don't have tasks" });
+      return this.setState(() => ({ error: "You don't have tasks" }));
     }
-    this.setState({
+    this.setState(() => ({
       visible: { id: -1 },
       error: "",
       todos: [],
-    });
+    }));
   }
 
   handleResedChecked() {
     let arr = this.state.todos;
     if (arr.filter((item) => item.check === true).length === 0) {
-      return this.setState({ error: "You don't have checked tasks" });
+      return this.setState(() => ({ error: "You don't have checked tasks" }));
     }
     arr = arr.filter((todo) => todo.check === false);
-    this.setState({
+    this.setState(() => ({
       todos: arr,
       error: "",
-    });
+    }));
   }
 
   handleResetDone() {
     let arr = this.state.todos;
     if (arr.filter((item) => item.isDone === true).length === 0) {
-      return this.setState({ error: "You don't have completed tasks" });
+      return this.setState(() => ({ error: "You don't have completed tasks" }));
     }
     arr = arr.filter((todo) => todo.isDone === false);
-    this.setState({
+    this.setState(() => ({
       todos: arr,
       error: "",
-    });
+    }));
   }
 
   render() {
