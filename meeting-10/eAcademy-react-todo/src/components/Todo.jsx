@@ -74,11 +74,14 @@ class Todo extends React.Component {
 
   handleUpdateTodo = (index) => {
     if (this.state.updatedValue === "" || this.state.updatedValue === null) {
-      return this.setState(() => ({ error: "Please enter a task" }));
+      return this.setState(() => ({
+        visible: -1,
+      }));
     }
     if (
-      this.state.todos.filter((todo) => todo.name === this.state.updatedValue)
-        .length > 0
+      this.state.todos.filter(
+        (todo, idx) => todo.name === this.state.updatedValue && idx !== index
+      ).length > 0
     ) {
       return this.setState(() => ({ error: "You already have a task" }));
     }
