@@ -6,7 +6,7 @@ class Todo extends React.Component {
     this.state = {
       inputValue: "",
       todos: [],
-      visible: { id: -1 },
+      visible: -1,
       updatedValue: null,
       error: "",
     };
@@ -63,13 +63,13 @@ class Todo extends React.Component {
     };
     this.setState(() => ({
       todos: popStateTodo(index),
-      visible: { id: -1 },
+      visible: -1,
       error: "",
     }));
   }
 
   handleVisible = (index) => {
-    this.setState({ visible: { id: index } });
+    this.setState({ visible: index });
   };
 
   handleUpdateTodo = (index) => {
@@ -88,7 +88,7 @@ class Todo extends React.Component {
       todos: arr,
       error: "",
       updatedValue: null,
-      visible: { id: -1 },
+      visible: -1,
     }));
   };
 
@@ -118,7 +118,7 @@ class Todo extends React.Component {
     this.setState(() => ({
       todos: arr,
       error: "",
-      visible: { id: -1 },
+      visible: -1,
     }));
   };
 
@@ -138,7 +138,7 @@ class Todo extends React.Component {
       return this.setState(() => ({ error: "You don't have tasks" }));
     }
     this.setState(() => ({
-      visible: { id: -1 },
+      visible: -1,
       error: "",
       todos: [],
     }));
@@ -238,7 +238,7 @@ class Todo extends React.Component {
                         </button>
                       </div>
 
-                      {this.state.visible.id === index ? (
+                      {this.state.visible === index ? (
                         <div className="update">
                           <input
                             className="input"
