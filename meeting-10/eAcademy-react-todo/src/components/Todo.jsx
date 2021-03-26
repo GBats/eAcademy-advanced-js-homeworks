@@ -147,8 +147,8 @@ class Todo extends React.Component {
     }));
   }
 
-  handleResedChecked() {
-    let arr = this.state.todos;
+  handleResetChecked() {
+    let arr = [this.state.todos];
     if (arr.filter((item) => item.check === true).length === 0) {
       return this.setState(() => ({ error: "You don't have checked tasks" }));
     }
@@ -160,7 +160,7 @@ class Todo extends React.Component {
   }
 
   handleResetDone() {
-    let arr = this.state.todos;
+    let arr = [...this.state.todos];
     if (arr.filter((item) => item.isDone === true).length === 0) {
       return this.setState(() => ({ error: "You don't have completed tasks" }));
     }
@@ -277,7 +277,7 @@ class Todo extends React.Component {
             </button>
             <button
               className="reset-btn"
-              onClick={() => this.handleResedChecked()}
+              onClick={() => this.handleResetChecked()}
             >
               Delete all checked tasks
             </button>
