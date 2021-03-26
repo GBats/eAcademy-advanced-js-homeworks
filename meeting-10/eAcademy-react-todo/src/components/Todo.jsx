@@ -106,7 +106,7 @@ class Todo extends React.Component {
       this.setState(() => ({
         todos: arr,
         error: "",
-        visible: { id: -1 },
+        visible: -1,
       }));
     }
   };
